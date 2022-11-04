@@ -6,9 +6,12 @@ import GoalInput from './comonents/GoalInput';
 
 export default function App() {
 
-
+  const [modalIsVsible, setModalIsVisible] = useState(false);
   const [courseGoals, setCourseGoals] = useState([])
 
+  function startAddGoalHandler(){
+    setModalIsVisible(true);
+  }
 
 
   function addGoalHandler(enteredGoalText) {
@@ -24,8 +27,8 @@ export default function App() {
  
   return (
     <View style={styles.appContainer}>
-      <Button title='Add new goal' color="red"/>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title='Add new goal' color="red" onPress={startAddGoalHandler}/>
+     {modalIsVsible && <GoalInput onAddGoal={addGoalHandler} />}
       <View style={styles.goalsContainer}>
         <FlatList keyExtractor={(id) => { id.toString(); }} data={courseGoals} renderItem={(itemData) => {
           itemData.index
